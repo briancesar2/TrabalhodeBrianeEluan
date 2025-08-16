@@ -1,0 +1,90 @@
+import random
+
+# Tabuleiros de exemplo (0 = vazio)
+puzzles = [
+    [
+        [5,3,0,0,7,0,0,0,0],
+        [6,0,0,1,9,5,0,0,0],
+        [0,9,8,0,0,0,0,6,0],
+        [8,0,0,0,6,0,0,0,3],
+        [4,0,0,8,0,3,0,0,1],
+        [7,0,0,0,2,0,0,0,6],
+        [0,6,0,0,0,0,2,8,0],
+        [0,0,0,4,1,9,0,0,5],
+        [0,0,0,0,8,0,0,7,9]
+    ]
+]
+
+def imprimir_tabuleiro(tabuleiro):
+    """Mostra o tabuleiro de forma organizada"""
+    print("   1 2 3   4 5 6   7 8 9")
+    for i in range(9):
+        if i % 3 == 0:
+            print("  +-------+-------+-------+")
+        linha = str(i+1) + " |"
+        for j in range(9):
+            if tabuleiro[i][j] == 0:
+                linha += " ."
+            else:
+                linha += " " + str(tabuleiro[i][j])
+            if (j+1) % 3 == 0:
+                linha += " |"
+        print(linha)
+    print("  +-------+-------+-------+")
+
+def valido(tabuleiro, linha, coluna, num):
+    """Verifica se o número pode ser colocado na posição"""
+    # linha
+    if num in tabuleiro[linha]:
+        return False
+    # coluna
+    for i in range(9):
+        if tabuleiro[i][coluna] == num:
+            return False
+    # subgrade 3x3
+    inicio_linha = (linha // 3) * 3
+    inicio_coluna = (coluna // 3) * 3
+    for i in range(inicio_linha, inicio_linha+3):
+        for j in range(inicio_coluna, inicio_coluna+3):
+            if tabuleiro[i][j] == num:
+                return False
+    return True
+
+def completo(tabuleiro):
+    """Verifica se não há zeros"""
+    for i in range(9):
+        for j in range(9):
+            if tabuleiro[i][j] == 0:
+                return False
+    return True
+
+def jogar():
+    tabuleiro = random.choice(puzzles)
+    # Copiar para o tabuleiro atual
+    jogo = [linha[:] for linha in tabuleiro]
+
+    while True:
+        imprimir_tabuleiro(jogo)
+        if completo(jogo):
+            print("Parabéns, você completou o Sudoku!")
+            break
+
+        comando = input("Digite linha coluna valor (ou 'sair'): ")
+        if comando.lower() == "sair":
+            print("Até logo!")
+            break
+        try:
+            l, c, v = comando.split()
+            l, c, v = int(l)-1, int(c)-1, int(v)
+            if tabuleiro[l][c] != 0:
+                print("Essa posição é fixa, não pode ser alterada.")
+                continue
+            if valido(jogo, l, c, v):
+                jogo[l][c] = v
+            else:
+                print("Jogada inválida! Conflito com regras do Sudoku.")
+        except:
+            print("Entrada inválida. Use: linha coluna valor (ex: 1 3 9)")
+
+if __name__ == "__main__":
+    jogar()
