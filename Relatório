@@ -1,0 +1,64 @@
+Relatório 
+
+A primeira coisa que fiz foi entender bem o que o trabalho pedia: um Sudoku 9x9 jogável no terminal, com algumas casas já preenchidas, validação das jogadas e detecção de vitória.
+Depois disso, fui quebrando o problema em partes menores:
+
+Criei a matriz 9x9 para representar o tabuleiro, usando o número 0 para indicar espaços vazios.
+
+Fiz uma função para mostrar o tabuleiro na tela de forma organizada, com linhas e colunas numeradas.
+
+Programei uma função que valida cada jogada, conferindo se o número não se repete na linha, na coluna ou no quadrado 3x3.
+
+Estruturei um loop principal, onde o jogador pode digitar a jogada no formato “linha coluna valor”.
+
+Coloquei uma regra para impedir mudanças em posições fixas (aquelas que já vêm preenchidas no início).
+
+Por fim, adicionei uma verificação que reconhece quando o tabuleiro está completo e correto, mostrando a mensagem de vitória.
+
+Onde busquei ajuda
+
+Para montar o jogo, consultei:
+
+Exercícios de lógica e listas que já tinha estudado;
+
+Alguns exemplos simples de Sudoku em sites educacionais;
+
+A documentação do Python, principalmente para entender melhor listas e manipulação de entrada/saída.
+
+Como pensei a lógica
+
+A ideia central foi manter sempre o tabuleiro como uma lista de listas (matriz).
+
+Para imprimir, percorro linha por linha e monto o visual com divisórias para parecer um Sudoku de papel.
+
+Para validar a jogada, a lógica checa:
+
+se o número já existe na linha,
+
+se já existe na coluna,
+
+e se já existe no quadrado 3x3 onde a jogada seria feita.
+
+O loop do jogo fica rodando até o jogador preencher tudo corretamente ou decidir sair.
+
+Problemas que encontrei
+
+No começo, tive dificuldade em pensar como dividir o tabuleiro em quadrados 3x3. Resolvi calculando o início de cada bloco com (linha // 3) * 3 e (coluna // 3) * 3.
+
+Outro ponto foi que o jogo permitia alterar os números fixos, o que não faz sentido. Resolvi isso mantendo uma cópia do tabuleiro inicial para comparar.
+
+Na parte da vitória, no início bastava não ter zeros, mas isso aceitava soluções erradas. Então melhorei a função para validar todas as regras antes de declarar o vencedor.
+
+Conclusão
+
+No fim, consegui montar um jogo de Sudoku 9x9 que funciona direitinho no terminal:
+
+mostra o tabuleiro de forma clara,
+
+deixa o jogador interagir,
+
+verifica se a jogada é válida,
+
+e reconhece quando o jogo foi completado com sucesso.
+
+Foi um exercício bem interessante porque precisei aplicar listas, matrizes, funções e bastante lógica para resolver os problemas. Apesar das dificuldades, deu para aprender bastante no processo e ver o código funcionando foi muito gratificante
