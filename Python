@@ -1,6 +1,6 @@
 import random
 
-# Tabuleiros de exemplo (0 = vazio)
+
 puzzles = [
     [
         [5,3,0,0,7,0,0,0,0],
@@ -34,14 +34,12 @@ def imprimir_tabuleiro(tabuleiro):
 
 def valido(tabuleiro, linha, coluna, num):
     """Verifica se o número pode ser colocado na posição"""
-    # linha
+
     if num in tabuleiro[linha]:
         return False
-    # coluna
     for i in range(9):
         if tabuleiro[i][coluna] == num:
             return False
-    # subgrade 3x3
     inicio_linha = (linha // 3) * 3
     inicio_coluna = (coluna // 3) * 3
     for i in range(inicio_linha, inicio_linha+3):
@@ -60,7 +58,6 @@ def completo(tabuleiro):
 
 def jogar():
     tabuleiro = random.choice(puzzles)
-    # Copiar para o tabuleiro atual
     jogo = [linha[:] for linha in tabuleiro]
 
     while True:
